@@ -18,7 +18,7 @@ jobs:
         CROWDIN_ACCESS_TOKEN: ${{ secrets.CROWDIN_ACCESS_TOKEN }}
         CROWDIN_PROJECT_BRANCH_ID: '126'
         CROWDIN_PROJECT_ID: '524354'
-        DEPOLY_PATH: '/depoly-prod'
+        DEPLOY_PATH: '/depoly-prod'
     - uses: elementemerald/r2-upload-action@v1.0.8
       with:
          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
