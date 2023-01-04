@@ -1,0 +1,30 @@
+name: ota-distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - uses: Ghost-chu/CrowdinCopyDeploy-action@master
+      env:
+        CROWDIN_ACCESS_TOKEN: ${{ secrets.CROWDIN_ACCESS_TOKEN }}
+        CROWDIN_PROJECT_BRANCH_ID: '126'
+        CROWDIN_PROJECT_ID: '524354'
+        DEPOLY_PATH: '/depoly-prod'
+    - uses: elementemerald/r2-upload-action@v1.0.8
+      with:
+         r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+         r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+         r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+         r2-bucket: ${{ secrets.R2_BUCKET }}
+         source-dir: '/depoly-prod'
+         
